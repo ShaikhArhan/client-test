@@ -1,7 +1,8 @@
 # Vela AI Chatbot
 
-This is a Next.js site exported as static files and deployed to GitHub Pages.
-No Docker or deployment secrets are required.
+This is a Next.js site exported as static files and deployed to Render.
+The `render.yaml` Blueprint and GitHub Actions workflow are at the repository
+root, alongside the `doc/` and `my-app/` folders.
 
 ## Local development
 
@@ -17,23 +18,23 @@ npm run lint
 npm run build
 ```
 
-## Claude → GitHub → production
+## Deploy to Render
 
-The workflow in `.github/workflows/ci-cd.yml` runs lint and builds the static
-site on pull requests to `master`. After changes are merged and pushed to
-`master`, a separate deployment job publishes the exact built artifact to
-GitHub Pages. Deployment only starts after the build job succeeds.
+The root-level `render.yaml` configures a Render Static Site to build from
+`my-app/` and publish the generated `out/` directory. The `doc/` folder is not
+part of the deployed site. GitHub Actions runs lint and build checks for pull
+requests and pushes to `main`.
 
-To enable publishing, connect the repository to GitHub Pages and choose
-**Settings → Pages → Build and deployment → Source → GitHub Actions**. Change
-`master` in the workflow if the repository uses a different production branch.
+To create the Render site, push this configuration to GitHub, then in Render
+choose **New → Blueprint**, connect this repository, and deploy the Blueprint.
+In the deployed service's settings, set **Auto-Deploy** to **After CI Checks
+Pass** if Render should wait for GitHub Actions before deploying each update.
 
-GitHub Actions sets the Pages base path while building, so project sites hosted
-under `https://<owner>.github.io/<repository>/` work without manually changing
-the application links.
+If the production branch is not `main`, update the branch in
+`.github/workflows/ci-cd.yml` and select the same branch when connecting the
+Blueprint.
 
-The production site URL used for canonical metadata is centralized in
-`lib/site-url.ts`.
+The canonical site URL used for metadata is centralized in `lib/site-url.ts`.
 
 ## SEO files
 
