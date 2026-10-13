@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sora:wght@600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme inline {
+  --color-ink: #141a33;
+  --color-muted: #586080;
+  --color-background: #f6f7fc;
+  --color-brand: #4a3fe0;
+  --color-brand-dark: #3a30b8;
+  --color-mint: #19c9a0;
+  --color-tint: #e9e7ff;
+  --color-line: #dfe2f0;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-display: "Sora", system-ui, sans-serif;
+}
+
+body {
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+:focus-visible {
+  outline: 3px solid #19c9a0;
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
